@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 interface TypingEffectProps {
   text: string;
@@ -15,54 +15,62 @@ export default function TypingEffect({
   typingSpeed = 100,
   eraseSpeed = 50,
   eraseDelay = 2000,
-  startDelay = 1000
+  startDelay = 500
 }: TypingEffectProps) {
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const typingTimeout = useRef<NodeJS.Timeout | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // Initial delay before starting
-    const timeout = setTimeout(() => {
-      typeWriter();
-    }, startDelay);
+    let timeout: NodeJS.Timeout;
 
-    return () => {
-      clearTimeout(timeout);
-      if (typingTimeout.current) clearTimeout(typingTimeout.current);
-    };
-  }, []);
-
-  const typeWriter = () => {
-    if (isTyping && !isDeleting) {
-      if (displayText.length < text.length) {
-        setDisplayText(text.substring(0, displayText.length + 1));
-        typingTimeout.current = setTimeout(typeWriter, typingSpeed);
-      } else {
-        // Done typing, wait and start erasing if desired
-        // setIsDeleting(true);
-        // typingTimeout.current = setTimeout(typeWriter, eraseDelay);
-        setIsTyping(false); // Stop here, don't erase
-      }
-    } else if (isDeleting) {
-      if (displayText.length > 0) {
-        setDisplayText(text.substring(0, displayText.length - 1));
-        typingTimeout.current = setTimeout(typeWriter, eraseSpeed);
-      } else {
-        // Done erasing, start typing again
-        setIsDeleting(false);
-        typingTimeout.current = setTimeout(typeWriter, typingSpeed);
-      }
+    // Initial delay before starting the typing effect
+    if (currentIndex === 0 && isTyping) {
+      timeout = setTimeout(() => {
+        if (currentIndex < text.length) {
+          setDisplayText(prev => prev + text[currentIndex]);
+          setCurrentIndex(prev => prev + 1);
+        } else {
+          setIsTyping(false);
+          setTimeout(() => {
+            setIsTyping(true);
+            setCurrentIndex(0);
+            setDisplayText('');
+          }, eraseDelay);
+        }
+      }, startDelay);
+      return () => clearTimeout(timeout);
     }
-  };
 
-  return (
-    <span className={`${className} relative`}>
-      {displayText}
-      {isTyping && (
-        <span className="animate-pulse">|</span>
-      )}
-    </span>
-  );
+    // Typing effect
+    if (isTyping) {
+      timeout = setTimeout(() => {
+        if (currentIndex < text.length) {
+          setDisplayText(prev => prev + text[currentIndex]);
+          setCurrentIndex(prev => prev + 1);
+        } else {
+          // We've typed the full text, now wait before erasing
+          setTimeout(() => {
+            setIsTyping(false);
+          }, eraseDelay);
+        }
+      }, typingSpeed);
+    } 
+    // Erasing effect
+    else {
+      timeout = setTimeout(() => {
+        if (displayText.length > 0) {
+          setDisplayText(prev => prev.slice(0, -1));
+        } else {
+          // We've erased everything, start typing again
+          setIsTyping(true);
+          setCurrentIndex(0);
+        }
+      }, eraseSpeed);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [currentIndex, displayText, eraseDelay, eraseSpeed, isTyping, startDelay, text, typingSpeed]);
+
+  return <span className={className}>{displayText}<span className="animate-pulse">|</span></span>;
 }

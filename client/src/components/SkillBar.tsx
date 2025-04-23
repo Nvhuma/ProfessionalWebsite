@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Skill } from '@/lib/utils';
 
 interface SkillBarProps {
@@ -9,32 +9,30 @@ interface SkillBarProps {
 
 export default function SkillBar({ skill, isVisible, delay = 0 }: SkillBarProps) {
   const [width, setWidth] = useState(0);
-
+  
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let timer: NodeJS.Timeout;
     
     if (isVisible) {
-      timeout = setTimeout(() => {
+      timer = setTimeout(() => {
         setWidth(skill.level);
       }, delay);
     } else {
       setWidth(0);
     }
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    
+    return () => clearTimeout(timer);
   }, [isVisible, skill.level, delay]);
-
+  
   return (
-    <div className="mb-6">
-      <div className="flex justify-between mb-1">
+    <div className="mb-4">
+      <div className="flex justify-between items-center mb-1">
         <span className="text-base font-medium text-dark">{skill.name}</span>
         <span className="text-sm font-medium text-gray-medium">{skill.level}%</span>
       </div>
-      <div className="h-2 rounded-full bg-gray-200 overflow-hidden">
+      <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden">
         <div 
-          className="h-full rounded-full bg-gradient-to-r from-primary to-purple-500 transition-all duration-1000 ease-out"
+          className="h-full bg-primary rounded-full transition-all duration-1000 ease-out"
           style={{ width: `${width}%` }}
         ></div>
       </div>

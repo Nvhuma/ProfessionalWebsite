@@ -1,165 +1,130 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
-import { useLocation } from 'wouter';
-import { scrollToSection } from '@/lib/utils';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface NavItem {
   label: string;
   href: string;
 }
 
-const navItems: NavItem[] = [
-  { label: 'Home', href: 'home' },
-  { label: 'Projects', href: 'projects' },
-  { label: 'Skills', href: 'skills' },
-  { label: 'About', href: 'about' },
-  { label: 'Contact', href: 'contact' },
-];
-
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [isScrolled, setIsScrolled] = useState(false);
   const [location] = useLocation();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      
-      // Add shadow to navbar when scrolled
-      if (scrollPosition > 10) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-
-      // Determine active section for highlighting nav items
-      const sections = document.querySelectorAll('section[id]');
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 100; // Adjust offset as needed
-        const sectionHeight = section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          const id = section.getAttribute('id');
-          if (id) setActiveSection(id);
-        }
-      });
+      setIsScrolled(window.scrollY > 0);
     };
-
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleNavClick = (href: string) => {
-    scrollToSection(href);
-    setIsOpen(false);
+  
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
   };
+  
+  // Close mobile menu when navigating
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location]);
+  
+  const navigation: NavItem[] = [
+    { label: 'Home', href: '/' },
+    { label: 'Projects', href: '/projects' },
+    { label: 'Skills', href: '/skills' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' }
+  ];
+  
+  const isActive = (path: string) => location === path;
 
   return (
     <header 
-      className={`fixed top-0 w-full bg-white bg-opacity-95 z-50 transition-all duration-300 ${
-        scrolled ? 'shadow-md' : ''
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled || isOpen ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4 md:justify-start md:space-x-10">
-          <div className="flex justify-start lg:w-0 lg:flex-1">
-            <a 
-              href="#home" 
-              className="text-xl font-bold text-primary"
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick('home');
-              }}
-            >
-              John<span className="text-dark">Doe</span>
-            </a>
+        <div className="flex justify-between h-16 items-center">
+          <div className="flex items-center">
+            <Link to="/">
+              <span className="text-2xl font-bold text-primary cursor-pointer">
+                <span className="text-dark">NV</span>Portfolio
+              </span>
+            </Link>
           </div>
           
-          {/* Mobile menu button */}
-          <div className="-mr-2 -my-2 md:hidden">
-            <Button
-              variant="ghost"
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-medium hover:text-primary"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'}`}></i>
-            </Button>
+          <div className="hidden md:block">
+            <div className="ml-4 flex items-center space-x-4">
+              {navigation.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <a 
+                    className={`rounded-md px-3 py-2 text-sm font-medium ${
+                      isActive(item.href) 
+                        ? 'text-primary font-semibold' 
+                        : 'text-dark hover:text-primary hover:bg-bg-light'
+                    } transition-colors duration-200`}
+                  >
+                    {item.label}
+                  </a>
+                </Link>
+              ))}
+              
+              <Link href="/contact">
+                <Button size="sm">
+                  Hire Me
+                </Button>
+              </Link>
+            </div>
           </div>
           
-          {/* Desktop navigation */}
-          <nav className="hidden md:flex space-x-10">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={`#${item.href}`}
-                className={`text-base font-medium transition-colors duration-200 ${
-                  activeSection === item.href ? 'text-primary border-b-2 border-primary' : 'text-gray-medium hover:text-primary'
-                }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick(item.href);
-                }}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-          
-          <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-            <Button 
-              className="ml-8 whitespace-nowrap" 
-              onClick={() => handleNavClick('contact')}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-dark hover:text-primary hover:bg-bg-light focus:outline-none"
             >
-              Let's Talk
-            </Button>
+              <span className="sr-only">Open main menu</span>
+              {isOpen ? (
+                <i className="fas fa-times text-xl"></i>
+              ) : (
+                <i className="fas fa-bars text-xl"></i>
+              )}
+            </button>
           </div>
         </div>
       </div>
       
       {/* Mobile menu */}
-      <div className={`absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden ${isOpen ? 'block' : 'hidden'}`}>
-        <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
-          <div className="pt-5 pb-6 px-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <a href="#home" className="text-xl font-bold text-primary" onClick={(e) => {
-                  e.preventDefault();
-                  handleNavClick('home');
-                }}>
-                  John<span className="text-dark">Doe</span>
-                </a>
-              </div>
-              <div className="-mr-2">
-                <Button
-                  variant="ghost"
-                  className="inline-flex items-center justify-center p-2 rounded-md text-gray-medium hover:text-primary"
-                  onClick={() => setIsOpen(false)}
+      {isOpen && (
+        <div className="md:hidden bg-white">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navigation.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <a
+                  className={`block px-3 py-2 rounded-md text-base font-medium ${
+                    isActive(item.href) 
+                      ? 'text-primary font-semibold' 
+                      : 'text-dark hover:text-primary hover:bg-bg-light'
+                  } transition-colors duration-200`}
                 >
-                  <i className="fas fa-times"></i>
+                  {item.label}
+                </a>
+              </Link>
+            ))}
+            <Link href="/contact">
+              <div className="px-3 py-2">
+                <Button size="sm" className="w-full">
+                  Hire Me
                 </Button>
               </div>
-            </div>
-            <div className="mt-6">
-              <nav className="grid gap-y-8">
-                {navItems.map((item) => (
-                  <a
-                    key={item.href}
-                    href={`#${item.href}`}
-                    className="text-base font-medium text-gray-medium hover:text-primary transition-colors duration-200"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavClick(item.href);
-                    }}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </nav>
-            </div>
+            </Link>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }

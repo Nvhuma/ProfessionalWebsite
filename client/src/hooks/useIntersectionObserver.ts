@@ -6,23 +6,22 @@ interface IntersectionObserverOptions {
   threshold?: number | number[];
 }
 
-export function useIntersectionObserver(
+export default function useIntersectionObserver(
   elementRef: RefObject<Element>,
   options: IntersectionObserverOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.1,
+    threshold: 0
   }
-): boolean {
-  const [isVisible, setIsVisible] = useState(false);
+) {
+  const [isIntersecting, setIsIntersecting] = useState(false);
 
   useEffect(() => {
     const element = elementRef.current;
-    
     if (!element) return;
 
     const observer = new IntersectionObserver(([entry]) => {
-      setIsVisible(entry.isIntersecting);
+      setIsIntersecting(entry.isIntersecting);
     }, options);
 
     observer.observe(element);
@@ -33,7 +32,5 @@ export function useIntersectionObserver(
     };
   }, [elementRef, options]);
 
-  return isVisible;
+  return isIntersecting;
 }
-
-export default useIntersectionObserver;
