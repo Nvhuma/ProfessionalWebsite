@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import profileImage from '../assets/profile.jpeg';
 
 const experiences = [
   {
@@ -39,8 +40,8 @@ export default function About() {
           <div className="relative lg:col-span-1">
             <div className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden shadow-lg">
               <img 
-                className="object-cover" 
-                src="/profile/nhlayiseko.jpeg" 
+                className="object-cover w-full h-full" 
+                src={profileImage} 
                 alt="Nhlayiseko Vhuma - Professional portrait" 
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-500 opacity-10"></div>

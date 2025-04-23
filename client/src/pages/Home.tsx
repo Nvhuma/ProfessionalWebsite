@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { useLocation } from 'wouter';
 import TypingEffect from '@/components/TypingEffect';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import profileImage from '../assets/profile.jpeg';
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -59,7 +60,7 @@ export default function Home() {
               <div className="relative block w-full bg-white rounded-lg overflow-hidden">
                 <img 
                   className="w-full" 
-                  src="/profile/nhlayiseko.jpeg" 
+                  src={profileImage} 
                   alt="Nhlayiseko Vhuma - Software Developer" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-500 opacity-20"></div>
