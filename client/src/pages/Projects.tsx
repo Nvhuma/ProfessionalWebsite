@@ -33,10 +33,10 @@ export default function Projects() {
           {
             id: 3,
             title: 'Image Detection using AI',
-            description: 'A simple image recognition project using TensorFlow and Keras with the MNIST dataset.',
+            description: 'A simple image recognition project using TensorFlow and Keras with the MNIST dataset. Data processing and model building, training with the MNIST dataset consisting of 28x28 greyscale images of handwritten digits.',
             imageUrl: 'https://images.unsplash.com/photo-1561736778-92e52a7769ef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
             repoUrl: 'https://github.com/Nvhuma/Image-Detection-using-AI',
-            technologies: ['Python', 'TensorFlow', 'Keras']
+            technologies: ['Python 3.6', 'TensorFlow', 'Numpy', 'Matplotlib', 'Keras']
           },
           {
             id: 4,
@@ -49,10 +49,10 @@ export default function Projects() {
           {
             id: 5,
             title: 'Data Science in VS Code',
-            description: 'A project using Visual Studio Code and the Microsoft Python extension with common data science libraries to explore basic data science scenarios.',
+            description: 'Python extension with common data science libraries to explore basic data science scenarios. Using data from the Titanic to set up a data science virtual environment. Import and clean data, create a machine learning model to predict survival on the Titanic.',
             imageUrl: 'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
             repoUrl: 'https://github.com/Nvhuma/Data-science-is-VS-code-',
-            technologies: ['Python', 'Data Science', 'Machine Learning']
+            technologies: ['Python', 'Data Science', 'Machine Learning', 'Statistics']
           },
           {
             id: 6,

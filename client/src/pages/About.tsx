@@ -4,6 +4,18 @@ import profileImage from '../assets/profile.jpeg';
 
 const experiences = [
   {
+    period: 'February 2024 - Present',
+    role: 'Junior Software Developer',
+    company: 'Singular Systems | 25 Scott Wavely',
+    description: [
+      'Developed and maintained applications using VB (Visual Basic).',
+      'Implemented business logic and integrated with databases.',
+      'Debugged and optimized VB applications for performance.',
+      'Designed user-friendly interfaces and worked with event-driven programming.',
+      'Applied problem-solving skills to enhance software functionality.'
+    ]
+  },
+  {
     period: '2023',
     role: 'Bachelor in Information Technology and Business Analysis',
     company: 'Educational Institution'
@@ -68,12 +80,19 @@ export default function About() {
             </div>
             <div className="mt-8">
               <h3 className="text-lg font-bold text-dark mb-4">Education & Experience</h3>
-              <ul className="space-y-4">
+              <ul className="space-y-6">
                 {experiences.map((exp, index) => (
                   <li key={index} className="border-l-2 border-primary pl-4 py-1">
                     <span className="block text-sm text-primary font-medium">{exp.period}</span>
                     <span className="block text-base font-bold text-dark">{exp.role}</span>
-                    <span className="block text-sm text-gray-medium">{exp.company}</span>
+                    <span className="block text-sm text-gray-medium mb-2">{exp.company}</span>
+                    {exp.description && (
+                      <ul className="list-disc ml-5 mt-2 space-y-1">
+                        {exp.description.map((item, i) => (
+                          <li key={i} className="text-sm text-gray-medium">{item}</li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 ))}
               </ul>
