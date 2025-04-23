@@ -59,8 +59,8 @@ export default function Home() {
               <div className="relative block w-full bg-white rounded-lg overflow-hidden">
                 <img 
                   className="w-full" 
-                  src="https://media.istockphoto.com/id/1470505973/photo/a-software-engineer-working-on-his-laptop-computer-in-a-modern-office.jpg?s=612x612&w=0&k=20&c=Q-sfdJqbBXgQ8V6zGz08qdbidZZKpL9L16DkuXwm6XE=" 
-                  alt="Software Developer" 
+                  src="/profile/nhlayiseko.jpeg" 
+                  alt="Nhlayiseko Vhuma - Software Developer" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-500 opacity-20"></div>
               </div>

@@ -40,8 +40,8 @@ export default function About() {
             <div className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden shadow-lg">
               <img 
                 className="object-cover" 
-                src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80" 
-                alt="Professional portrait" 
+                src="/profile/nhlayiseko.jpeg" 
+                alt="Nhlayiseko Vhuma - Professional portrait" 
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-500 opacity-10"></div>
             </div>
