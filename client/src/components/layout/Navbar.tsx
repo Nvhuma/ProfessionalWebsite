@@ -61,16 +61,16 @@ export default function Navbar() {
           <div className="hidden md:block">
             <div className="ml-4 flex items-center space-x-4">
               {navigation.map((item) => (
-                <Link key={item.href} href={item.href}>
-                  <a 
-                    className={`rounded-md px-3 py-2 text-sm font-medium ${
-                      isActive(item.href) 
-                        ? 'text-primary font-semibold' 
-                        : 'text-dark hover:text-primary hover:bg-bg-light'
-                    } transition-colors duration-200`}
-                  >
-                    {item.label}
-                  </a>
+                <Link 
+                  key={item.href} 
+                  href={item.href}
+                  className={`rounded-md px-3 py-2 text-sm font-medium ${
+                    isActive(item.href) 
+                      ? 'text-primary font-semibold' 
+                      : 'text-dark hover:text-primary hover:bg-bg-light'
+                  } transition-colors duration-200`}
+                >
+                  {item.label}
                 </Link>
               ))}
               
@@ -103,16 +103,16 @@ export default function Navbar() {
         <div className="md:hidden bg-white">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             {navigation.map((item) => (
-              <Link key={item.href} href={item.href}>
-                <a
-                  className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    isActive(item.href) 
-                      ? 'text-primary font-semibold' 
-                      : 'text-dark hover:text-primary hover:bg-bg-light'
-                  } transition-colors duration-200`}
-                >
-                  {item.label}
-                </a>
+              <Link 
+                key={item.href} 
+                href={item.href}
+                className={`block px-3 py-2 rounded-md text-base font-medium ${
+                  isActive(item.href) 
+                    ? 'text-primary font-semibold' 
+                    : 'text-dark hover:text-primary hover:bg-bg-light'
+                } transition-colors duration-200`}
+              >
+                {item.label}
               </Link>
             ))}
             <Link href="/contact">
