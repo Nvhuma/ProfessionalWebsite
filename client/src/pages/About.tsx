@@ -4,7 +4,7 @@ import profileImage from '../assets/profile.jpeg';
 
 const experiences = [
   {
-    period: 'February 2024 - Present',
+    period: 'February 2024 - 2025',
     role: 'Junior Software Developer',
     company: 'Singular Systems | 25 Scott Wavely',
     description: [
@@ -18,7 +18,7 @@ const experiences = [
   {
     period: '2023',
     role: 'Bachelor in Information Technology and Business Analysis',
-    company: 'Educational Institution'
+    company: 'IIE Rosebank College'
   },
   {
     period: '2022',
