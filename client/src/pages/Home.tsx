@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { Button } from '@/components/ui/button';
+import { Button } from '../components/ui/button';
 import { useLocation } from 'wouter';
-import TypingEffect from '@/components/TypingEffect';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import TypingEffect from '../components/TypingEffect';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import profileImage from '../assets/profile.jpeg';
 
 export default function Home() {

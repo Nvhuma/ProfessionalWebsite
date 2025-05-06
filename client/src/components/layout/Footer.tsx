@@ -21,7 +21,7 @@ export default function Footer() {
           
           <div className="flex flex-col items-center md:items-end">
             <div className="flex space-x-4 mb-4">
-              <a href="#" aria-label="LinkedIn" className="text-gray-300 hover:text-white">
+              <a href="https://www.linkedin.com/in/nhlayiseko-vhuma-a20177258/" aria-label="LinkedIn" className="text-gray-300 hover:text-white">
                 <i className="fab fa-linkedin text-xl"></i>
               </a>
               <a href="https://github.com/Nvhuma" aria-label="GitHub" className="text-gray-300 hover:text-white">

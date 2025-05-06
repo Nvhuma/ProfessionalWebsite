@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
-import { useToast } from '@/hooks/use-toast';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
-import { apiRequest } from '@/lib/queryClient';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Textarea } from '../components/ui/textarea';
+import { Label } from '../components/ui/label';
+import { useToast } from '../hooks/use-toast';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import { apiRequest } from '../lib/queryClient';
 
 interface ContactFormData {
   name: string;
@@ -89,7 +89,7 @@ export default function Contact() {
   ];
 
   const socialLinks = [
-    { name: 'LinkedIn', icon: 'fab fa-linkedin', url: '#' },
+    { name: 'LinkedIn', icon: 'fab fa-linkedin', url: 'https://www.linkedin.com/in/nhlayiseko-vhuma-a20177258/' },
     { name: 'GitHub', icon: 'fab fa-github', url: 'https://github.com/Nvhuma' }
   ];
 

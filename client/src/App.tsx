@@ -1,6 +1,6 @@
 import { Route, Switch } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
-import NotFound from "@/pages/not-found";
+import NotFound from "@/pages/NotFound";
 import Home from "@/pages/Home";
 import Projects from "@/pages/Projects";
 import Skills from "@/pages/Skills";

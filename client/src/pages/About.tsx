@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
+import useIntersectionObserver from '../hooks/useIntersectionObserver';
+import resumePDF from '../assets/Nhlayiseko Bvuma  (3).pdf';
 import profileImage from '../assets/profile.jpeg';
 
 const experiences = [
@@ -28,9 +29,9 @@ const experiences = [
 ];
 
 const socialLinks = [
-  { name: 'LinkedIn', icon: 'fab fa-linkedin', url: '#' },
+  { name: 'LinkedIn', icon: 'fab fa-linkedin', url: 'https://www.linkedin.com/in/nhlayiseko-vhuma-a20177258/' },
   { name: 'GitHub', icon: 'fab fa-github', url: 'https://github.com/Nvhuma' },
-  { name: 'Resume', icon: 'fas fa-file-download', url: '#' }
+  { name: 'Resume', icon: 'fas fa-file-download', url: resumePDF, download: 'Nhlayiseko_Vhuma_Resume.pdf' }
 ];
 
 export default function About() {
@@ -53,7 +54,7 @@ export default function About() {
             <div className="aspect-w-3 aspect-h-4 rounded-lg overflow-hidden shadow-lg">
               <img 
                 className="object-cover w-full h-full" 
-                src={profileImage} 
+                src={profileImage}
                 alt="Nhlayiseko Vhuma - Professional portrait" 
               />
               <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-500 opacity-10"></div>
@@ -103,9 +104,10 @@ export default function About() {
                   key={index}
                   href={link.url} 
                   className="text-primary hover:text-blue-700 transition-colors duration-200" 
-                  title={`${link.name} Profile`}
-                  target="_blank"
-                  rel="noreferrer"
+                  title={`${link.name} ${link.download ? 'Download' : 'Profile'}`}
+                  target={link.download ? '_self' : '_blank'}
+                  rel={link.download ? undefined : 'noreferrer'}
+                  download={link.download}
                 >
                   <i className={`${link.icon} text-2xl`}></i>
                 </a>
