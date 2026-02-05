@@ -1,37 +1,54 @@
 import { useRef } from 'react';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
-import resumePDF from '../assets/Nhlayiseko Bvuma  (3).pdf';
-import profileImage from '../assets/profile.jpeg';
+import resumePDF from '../assets/Nhlayiseko Vhuma - AI Engineer CV (1).pdf';
+import profileImage from '../assets/WhatsApp Image 2026-01-15 at 12.44.24 PM (1).jpeg';
 
 const experiences = [
   {
-    period: 'February 2024 - 2025',
-    role: 'Junior Software Developer',
-    company: 'Singular Systems | 25 Scott Wavely',
+    period: '2019 - Present',
+    role: 'Software Engineer',
+    company: 'Singular Systems | South Africa',
     description: [
-      'Developed and maintained applications using VB (Visual Basic).',
-      'Implemented business logic and integrated with databases.',
-      'Debugged and optimized VB applications for performance.',
-      'Designed user-friendly interfaces and worked with event-driven programming.',
-      'Applied problem-solving skills to enhance software functionality.'
+      'Architected backend systems for education platforms serving 5,000+ students.',
+      'Built and optimized RESTful APIs with JWT authentication for high-concurrency usage.',
+      'Developed machine learning features for personalization and predictive student analytics.',
+      'Improved SQL performance and data pipelines for real-time decision support.'
     ]
   },
   {
-    period: '2023',
-    role: 'Bachelor in Information Technology and Business Analysis',
-    company: 'IIE Rosebank College'
+    period: '2015 - 2019',
+    role: 'Bachelor of Technology in Information Technology',
+    company: 'Rosebank College, South Africa',
+    description: [
+      'Relevant coursework: Machine Learning, Data Structures and Algorithms, Database Systems, and NLP Fundamentals.'
+    ]
   },
   {
-    period: '2022',
-    role: 'Student Developer',
-    company: 'Holberton School Projects'
+    period: 'Ongoing',
+    role: 'Technical Certifications',
+    company: 'Machine Learning Specialization | Advanced ASP.NET Core Development | Prompt Engineering and LLM Applications'
   }
+];
+
+const coreSkills = [
+  'LLM Integration',
+  'Prompt Engineering',
+  'Supervised and Unsupervised Learning',
+  'Neural Networks (ANN, CNN)',
+  'NLP',
+  'Reinforcement Learning',
+  'ASP.NET Core (.NET 8)',
+  'Microservices',
+  'SQL Server Optimization',
+  'TensorFlow/Keras',
+  'Scikit-learn',
+  'React'
 ];
 
 const socialLinks = [
   { name: 'LinkedIn', icon: 'fab fa-linkedin', url: 'https://www.linkedin.com/in/nhlayiseko-vhuma-a20177258/' },
   { name: 'GitHub', icon: 'fab fa-github', url: 'https://github.com/Nvhuma' },
-  { name: 'Resume', icon: 'fas fa-file-download', url: resumePDF, download: 'Nhlayiseko_Vhuma_Resume.pdf' }
+  { name: 'Resume', icon: 'fas fa-file-download', url: resumePDF, download: 'Nhlayiseko_Vhuma_AI_Engineer_CV.pdf' }
 ];
 
 export default function About() {
@@ -66,21 +83,30 @@ export default function About() {
             </h2>
             <div className="mt-6 text-gray-medium space-y-4">
               <p>
-                I'm Nhlayiseko Vhuma, a recent graduate with a Bachelor in Information Technology and Business Analysis. 
-                My journey in software development began during my academic years, where I discovered my passion for creating 
-                solutions to real-world problems.
+                I am Nhlayiseko Vhuma, an AI/ML Engineer and Backend Systems Architect focused on building practical, scalable digital products.
               </p>
               <p>
-                I specialize in backend development, with a growing interest in creating robust, scalable applications. 
-                I enjoy working with various programming languages and frameworks, and I'm always eager to learn new technologies.
+                My work combines machine learning, API engineering, and data architecture to deliver end-to-end solutions, especially in education technology and analytics-driven systems.
               </p>
               <p>
-                What drives me is the opportunity to collaborate with teams and contribute to meaningful projects. 
-                I value clear communication, teamwork, and a problem-solving approach to development challenges.
+                I enjoy turning business goals into production-ready systems using Python and C#, with strengths in model development, optimization, and modern AI workflows.
               </p>
             </div>
             <div className="mt-8">
-              <h3 className="text-lg font-bold text-dark mb-4">Education & Experience</h3>
+              <h3 className="text-lg font-bold text-dark mb-4">Core Skill Set</h3>
+              <div className="flex flex-wrap gap-2">
+                {coreSkills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="inline-flex items-center rounded-full bg-white px-3 py-1 text-sm text-gray-medium border border-gray-200"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="mt-8">
+              <h3 className="text-lg font-bold text-dark mb-4">Experience, Education & Certifications</h3>
               <ul className="space-y-6">
                 {experiences.map((exp, index) => (
                   <li key={index} className="border-l-2 border-primary pl-4 py-1">

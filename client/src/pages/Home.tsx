@@ -3,7 +3,7 @@ import { Button } from '../components/ui/button';
 import { useLocation } from 'wouter';
 import TypingEffect from '../components/TypingEffect';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
-import profileImage from '../assets/profile.jpeg';
+import profileImage from '../assets/WhatsApp Image 2026-01-15 at 12.44.24 PM (1).jpeg';
 
 export default function Home() {
   const [, setLocation] = useLocation();
@@ -31,10 +31,10 @@ export default function Home() {
                 <span className="block">Software Developer</span>
               </h3>
               <p className="mt-3 text-base text-gray-medium sm:mt-5 sm:text-lg">
-                A recent graduate with a Bachelor in Information Technology and Business analysis, 
-                I am eager to apply my academic knowledge and strong communication and teamwork skills 
-                to contribute meaningfully to the IT industry. I enjoy collaborating with teams and 
-                have a passion for solving problems, with a strong focus on backend development.
+                I am an AI/ML Engineer and Backend Systems Architect with hands-on experience designing
+                scalable APIs, data-driven platforms, and intelligent learning solutions. I specialize in
+                turning product goals into production-ready systems using Python, C#, and modern machine
+                learning workflows, with a strong focus on reliability, performance, and measurable impact.
               </p>
               <div className="mt-8 sm:flex sm:justify-center lg:justify-start">
                 <Button 
