@@ -13,8 +13,8 @@ function App() {
   return (
     <>
       <Toaster />
-      <Layout>
-        <Router hook={useHashLocation}>
+      <Router hook={useHashLocation}>
+        <Layout>
           <Switch>
             <Route path="/" component={Home} />
             <Route path="/projects" component={Projects} />
@@ -23,8 +23,8 @@ function App() {
             <Route path="/contact" component={Contact} />
             <Route component={NotFound} />
           </Switch>
-        </Router>
-      </Layout>
+        </Layout>
+      </Router>
     </>
   );
 }
