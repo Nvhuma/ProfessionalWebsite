@@ -3,6 +3,7 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertMessageSchema } from "@shared/schema";
 import { ZodError } from "zod";
+import { sendContactNotification } from "./mailer";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // API routes
@@ -13,6 +14,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Store the message
       const message = await storage.createMessage(validatedData);
+
+      // Send email notification with sender details and message content
+      await sendContactNotification(validatedData);
       
       return res.status(201).json({
         message: "Message sent successfully",
