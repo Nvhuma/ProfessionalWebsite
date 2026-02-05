@@ -25,6 +25,20 @@ export default function Contact() {
   const { toast } = useToast();
   const sectionRef = useRef<HTMLElement>(null);
   const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
+  const destinationEmail = 'nhlayisekobvuma7@gmail.com';
+
+  const openMailtoFallback = (data: ContactFormData) => {
+    const subject = data.subject?.trim() || `Portfolio inquiry from ${data.name}`;
+    const body = [
+      `Name: ${data.name}`,
+      `Email: ${data.email}`,
+      '',
+      data.message
+    ].join('\n');
+
+    const mailtoUrl = `mailto:${destinationEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoUrl;
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -72,10 +86,10 @@ export default function Contact() {
         message: ''
       });
     } catch (error) {
+      openMailtoFallback(formData);
       toast({
-        title: "Failed to send message",
-        description: "There was an error sending your message. Please try again.",
-        variant: "destructive",
+        title: "Email app opened",
+        description: "Direct send is unavailable here, so we opened your mail app with the message prefilled.",
       });
     } finally {
       setIsSubmitting(false);
